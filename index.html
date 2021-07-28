@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link rel="stylesheet" href="style.css">
+
+      <title>MoneyStat</title>
+</head>
+<body>
+      <div class="loginPg">
+                  <h1 id="welcome" class="text-center">Welcome to MoneyStat</h1>
+                  
+
+            <div id="loginArea" class="submitArea">
+                  <h4>Login</h4>
+                  <input type="text" class="form-control" placeholder="USERNAME"><br>
+                  <input type="password" class="form-control" name="" id="" placeholder="PASSWORD"><br>
+                  <button id="login" class="btn btn-success">Login</button>
+            </div>
+            
+      </div>
+
+
+
+      <div id="transactionArea" class="transactionArea">
+            <h1 class="text-center">Your transactions</h1>
+            <div class="row disp text-center">
+                  <div class="col-md-4">
+                        <div class="dispBox ">
+                              <h3>Deposit</h2>
+                                    <h1><span id="depoDisp">00</span>Taka</h1>
+                        </div>
+                  </div>
+                  <div class="col-md-4">
+                        <div class="dispBox">
+                              <h2>Withdraw</h2>
+                              <h1><span id="withDisp" >00</span>Taka</h1>
+                        </div>
+                  </div>
+                  <div class="col-md-4">
+                        <div class="dispBox">
+                              <h2>Balance</h2>
+                              <h1><span id="balDisp">00</span>Taka</h1>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="row">
+                  <div class="col-md-6">
+                        <div class="transBox">
+                              <h3>Deposit</h3>
+                              <input class="form-control" type="number" name="" id="depoBox" placeholder="Enter Deposit Amount"><br>
+                              <button id="deposit" class="btn btn-success">Deposit</button>
+                        </div>
+                  </div>
+                  <div class="col-md-6">
+                        <div class="transBox">
+                              <h3>Withdraw</h3>
+                              <input class="form-control" type="number" name="" id="withBox" placeholder="Enter Withdraw Amount"><br>
+                              <button id="withdraw" class="btn btn-success">Withdraw</button>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <script>
+            // login button handler
+
+            const loginBtn = document.getElementById("login");
+            loginBtn.addEventListener("click", function(){
+                 const loginArea = document.getElementById("loginArea");
+                  loginArea.style.display = "none";
+                  const transactionArea = document.getElementById('transactionArea');
+                  transactionArea.style.display="block";
+                  const welcome=document.getElementById('welcome');
+                  welcome.style.display='none';
+                
+
+            })
+
+            //deposit button event handler
+            function getTotalDeposit()
+            {
+                  const depositAmount = document.getElementById("depoBox").value;
+                  const depoDisp=document.getElementById('depoDisp').innerText;
+                  const totaldeposit = parseFloat(depoDisp)+parseFloat(depositAmount);
+                  return totaldeposit;
+            }
+
+            const deposit=document.getElementById("deposit");
+            deposit.addEventListener("click",function(){
+
+                  const totalMoney=getTotalDeposit();
+                  document.getElementById("depoDisp").innerText = totalMoney;
+                  document.getElementById("depoBox").value="";
+
+                  
+                  const balance=document.getElementById("balDisp").innerText=totalMoney;
+                  
+                  
+
+            })
+
+            function getBalance()
+            {
+                  const totalBalance = parseFloat(document.getElementById("balDisp").innerText);
+                  return totalBalance;
+            }
+
+                        //withdraw button event handler
+                  const withdraw= document.getElementById("withdraw");
+                  withdraw.addEventListener("click",function(){
+
+                        const withBox = parseFloat(document.getElementById("withBox").value);
+                        var withBalance = parseFloat(document.getElementById("withDisp").innerText);
+                        withBalance=withBalance+withBox;
+                        document.getElementById("withDisp").innerText=withBalance;
+                        document.getElementById("withBox").value="";
+
+                        var balance = getBalance();
+                        document.getElementById("balDisp").innerText=balance-parseFloat(withBox);
+                  })
+      </script>
+
+</body>
+</html>
